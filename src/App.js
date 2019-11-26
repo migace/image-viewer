@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bulma/bulma.sass";
+
+import { UnsplashService } from 'services';
+import { Navbar } from 'components/Navbar';
+import { ImageViewer } from 'scenes/ImageViewer';
+import { ImageDetails } from 'scenes/ImageDetails';
+import { LocalCollection } from 'scenes/LocalCollection';
+
 import './App.css';
 
-function App() {
+export const App = () => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await new UnsplashService().getPhotos();
+      setImages(response);
+    }
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <section className="section">
+        <div className="container">
+          <Switch>
+            <Route path="/details/:photoId">
+              <ImageDetails />
+            </Route>
+            <Route path="/local-collection">
+              <LocalCollection />
+            </Route>
+            <Route path="/">
+              <ImageViewer images={images} />
+            </Route>
+          </Switch>
+        </div>
+      </section>
+    </Router>
   );
 }
-
-export default App;
