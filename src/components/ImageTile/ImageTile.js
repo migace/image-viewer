@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { ToggleButton } from 'components/ToggleButton';
 import { ToggleButtonWrapper } from './styles';
 
-export const ImageTile = ({ image, author, onClick }) => {
+export const ImageTile = ({ local = false, image, author, onClick, onOpen, onClose }) => {
   const { description, shortDescription, src, link, createdAt} = image;
   const { image: authorImage, bio, name, username } = author;
 
@@ -18,8 +18,9 @@ export const ImageTile = ({ image, author, onClick }) => {
           <ToggleButton
             openText="Save"
             closeText="Remove"
-            onOpen={() => {}}
-            onClose={() => {}}
+            onOpen={onOpen}
+            onClose={onClose}
+            state={local}
           />
         </ToggleButtonWrapper>
       </div>

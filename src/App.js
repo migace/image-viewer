@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,44 +7,41 @@ import {
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bulma/bulma.sass";
 
-import { UnsplashService } from 'services';
 import { Navbar } from 'components/Navbar';
 import { ImageViewer } from 'scenes/ImageViewer';
 import { ImageDetails } from 'scenes/ImageDetails';
 import { LocalCollection } from 'scenes/LocalCollection';
+import { AppProvider } from 'context/AppContext';
+import { editImage, removeImage } from 'utils/behaviors';
+import { reducer } from 'reducer';
 
 import './App.css';
 
-export const App = () => {
-  const [images, setImages] = useState([]);
+export const initialState = {
+  images: [],
+  localCollection: [],
+  localIds: []
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await new UnsplashService().getPhotos();
-      setImages(response);
-    }
-
-    fetchData();
-  }, []);
-
-  return (
+export const App = () => (
+  <AppProvider initialState={initialState} reducer={reducer}>
     <Router>
       <Navbar />
       <section className="section">
         <div className="container">
           <Switch>
             <Route path="/details/:photoId">
-              <ImageDetails />
+              <ImageDetails onEdit={editImage} onRemove={removeImage} />
             </Route>
             <Route path="/local-collection">
               <LocalCollection />
             </Route>
             <Route path="/">
-              <ImageViewer images={images} />
+              <ImageViewer />
             </Route>
           </Switch>
         </div>
       </section>
     </Router>
-  );
-}
+  </AppProvider>
+);
