@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Image viewer which download images from Unsplash service and give possibility for user to save these images locally. You can modify some properties of every saved image.
 
+![Image Viewer app](http://serwer1843592.home.pl/static/images/github/image-viewer.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
