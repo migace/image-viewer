@@ -28,5 +28,5 @@ Runs API server in development mode.
 In `api/` directory of this project you should change name of .env-sample file to .env.
 There you should put your Unsplash API credentials.
 
-For demo, you can use my hosted service, please run app by `npm start`. In development mode
+For demo, you can use my hosted API service, please run app by `npm start`. In development mode
 you can use dev server - `npm run dev`. For details, please see `src/config.js`
