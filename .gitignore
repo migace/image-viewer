@@ -24,3 +24,5 @@ yarn-error.log*
 
 # server 
 /api/node_modules/
+/api/.env
+.vscode/

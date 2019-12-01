@@ -9,3 +9,9 @@ export const ToggleButtonWrapper = styled.div`
     border-radius: 0;
   }
 `;
+
+export const ImageTileStyleWrapper = styled.div`
+  img {
+    object-fit: cover;
+  }
+`;
