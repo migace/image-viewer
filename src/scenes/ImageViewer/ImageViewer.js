@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { size } from 'lodash';
 
 import { REPLACE } from 'actions';
 import { SearchBar } from 'components/SearchBar';
+import { ErrorContent } from 'components/ErrorContent';
 import { ImageList } from 'scenes/ImageList';
 import { useAppContext } from 'context/AppContext';
 import { UnsplashService } from 'services/UnsplashService';
@@ -10,13 +11,19 @@ import { removeImage, saveImage } from 'utils/behaviors';
 
 export const ImageViewer = () => {
   const [state, dispatch] = useAppContext();
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({
-        type: REPLACE,
-        payload: await new UnsplashService().getPhotos()
-      });
+      try {
+        dispatch({
+          type: REPLACE,
+          payload: await new UnsplashService().getPhotos()
+        });
+      } catch (err) {
+        setError(true);
+        console.log(err);
+      }
     }
 
     fetchData();
@@ -30,6 +37,9 @@ export const ImageViewer = () => {
       <SearchBar />
       {size(state.images) > 0 && (
         <ImageList images={state.images} onOpen={openHandler} onClose={closeHandler} />
+      )}
+      {error && (
+        <ErrorContent />
       )}
     </>
   );

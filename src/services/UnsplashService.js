@@ -2,6 +2,7 @@ import {
   UNSPLASH_API,
   UNSPLASH_API_DETAILS,
 } from 'utils/constants';
+import { ServiceException } from 'utils/exceptions';
 
 let instance = null;
 
@@ -17,6 +18,9 @@ export class UnsplashService {
   getPhotos = (page = 1, per_page = 10, order_by = 'latest') => (
     fetch(UNSPLASH_API)
       .then(data => data.json())
+      .catch(err => {
+        throw new ServiceException(err);
+      })
   )
 
   getPhoto = (photoId) => {
