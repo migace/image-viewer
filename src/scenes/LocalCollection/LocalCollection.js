@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { difference, size } from 'lodash';
+import { size } from 'lodash';
 
 import {
   ADD_LOCAL,
@@ -9,6 +9,7 @@ import {
 } from 'actions';
 import { useAppContext } from 'context/AppContext';
 import { SearchBar } from 'components/SearchBar';
+import { TextInfo } from 'components/TextInfo';
 import { ImageList } from 'scenes/ImageList';
 import { LocalStorageService } from 'services';
 import { UnsplashService } from 'services/UnsplashService';
@@ -55,8 +56,18 @@ export const LocalCollection = () => {
   return (
     <>    
       <SearchBar />
-      {size(state.localCollection) > 0 && (
-        <ImageList images={state.localCollection} onOpen={openHandler} onClose={closeHandler} />
+      {size(state.localCollection) > 0 ? (
+        <ImageList 
+          images={state.localCollection}
+          onOpen={openHandler}
+          onClose={closeHandler}
+        />
+      ) : (
+        <TextInfo
+          ico="database"
+          message="collection is empty"
+          color="#666"
+        />
       )}
     </>
   )

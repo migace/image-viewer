@@ -3,7 +3,7 @@ import { size } from 'lodash';
 
 import { REPLACE } from 'actions';
 import { SearchBar } from 'components/SearchBar';
-import { ErrorContent } from 'components/ErrorContent';
+import { TextInfo } from 'components/TextInfo';
 import { ImageList } from 'scenes/ImageList';
 import { useAppContext } from 'context/AppContext';
 import { UnsplashService } from 'services/UnsplashService';
@@ -39,7 +39,7 @@ export const ImageViewer = () => {
         <ImageList images={state.images} onOpen={openHandler} onClose={closeHandler} />
       )}
       {error && (
-        <ErrorContent />
+        <TextInfo ico="ban" message="some error occurred, while fetching api" />
       )}
     </>
   );

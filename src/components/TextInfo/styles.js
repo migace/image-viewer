@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const ErrorWrapper = styled.div`
-  color: #f00;
+export const Wrapper = styled.div`
+  color: ${props => props.color || '#f00'};
 `;
 
 export const IconWrapper = styled.span`
