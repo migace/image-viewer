@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 export const OPEN_BUTTON = 'open-btn';
 export const CLOSE_BUTTON = 'close-btn';

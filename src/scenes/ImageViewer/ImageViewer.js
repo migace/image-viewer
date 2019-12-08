@@ -27,7 +27,7 @@ export const ImageViewer = () => {
     }
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   const openHandler = (image) => () => saveImage(dispatch, image);
   const closeHandler = (image) => () => removeImage(dispatch, image);

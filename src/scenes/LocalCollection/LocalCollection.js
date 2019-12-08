@@ -29,7 +29,7 @@ export const LocalCollection = () => {
     }
 
     getCollection();
-  }, []);
+  }, [dispatch, localStorageService]);
 
   const openHandler = (payload) => () => {
     dispatch({

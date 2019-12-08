@@ -10,7 +10,7 @@ export const ImageDetails = ({ match, history, onEdit, onRemove }) => {
 
   useEffect(() => {
     setIndex(findIndex(state.localCollection, (item) =>  item.id === match.params.photoId ));
-  }, []);
+  }, [state.localCollection, match.params.photoId]);
 
   const onEditHandler = (data) => () => onEdit(dispatch, data);
   const onRemoveHandler = (data) => () => {
